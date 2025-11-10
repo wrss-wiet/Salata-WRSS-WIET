@@ -8,12 +8,12 @@
     <v-card class="tw-p-4 sm:tw-p-6">
       <v-expand-transition>
         <div v-show="state === states.CHOICES">
-          <div class="tw-text-md mb-1 tw-text-center">
-            How would you like to add <br class="tw-block sm:tw-hidden" />
-            your availability?
+          <div class="mb-1 tw-text-md tw-text-center">
+            Jak chcesz dodać <br class="tw-block sm:tw-hidden" />
+            swoją dostępność?
           </div>
           <div class="tw-pb-4 tw-text-center tw-text-xs tw-text-dark-gray">
-            You can always manually edit after autofilling
+            Po automatycznym wypełnieniu zawsze możesz edytować ręcznie
           </div>
           <div class="tw-flex tw-flex-col tw-gap-2">
             <v-btn block @click="autofillWithGcal" class="tw-bg-white">
@@ -25,33 +25,7 @@
                   src="@/assets/google_logo.svg"
                 />
                 <v-spacer />
-                Autofill with Google Calendar
-                <v-spacer />
-              </div>
-            </v-btn>
-            <v-btn block @click="autofillWithApple" class="tw-bg-white">
-              <div class="tw-flex tw-w-full tw-items-center tw-gap-2">
-                <v-img
-                  class="tw-flex-initial"
-                  width="20"
-                  height="20"
-                  src="@/assets/apple_logo.svg"
-                />
-                <v-spacer />
-                Autofill with Apple Calendar
-                <v-spacer />
-              </div>
-            </v-btn>
-            <v-btn block @click="autofillWithOutlook" class="tw-bg-white">
-              <div class="tw-flex tw-w-full tw-items-center tw-gap-2">
-                <v-img
-                  class="tw-flex-initial"
-                  width="20"
-                  height="20"
-                  src="@/assets/outlook_logo.svg"
-                />
-                <v-spacer />
-                Autofill with Outlook Calendar
+                Wypełnij z Kalendarza Google
                 <v-spacer />
               </div>
             </v-btn>
@@ -60,18 +34,18 @@
               <div
                 class="tw-text-center tw-text-xs tw-font-medium tw-text-dark-gray"
               >
-                or
+                lub
               </div>
               <v-divider />
             </div>
-            <v-btn @click="setAvailabilityManually" block>Manually</v-btn>
+            <v-btn @click="setAvailabilityManually" block>Ręcznie</v-btn>
           </div>
         </div>
       </v-expand-transition>
       <v-expand-transition>
         <CalendarPermissionsCard
           v-show="state === states.GCAL_PERMISSIONS"
-          cancelLabel="Back"
+          cancelLabel="Wróć"
           @cancel="showChoices"
           @allow="$emit('allowGoogleCalendar')"
         />

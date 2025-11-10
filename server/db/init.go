@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,6 +12,7 @@ import (
 
 var Client *mongo.Client
 var Db *mongo.Database
+
 var EventsCollection *mongo.Collection
 var UsersCollection *mongo.Collection
 var DailyUserLogCollection *mongo.Collection
@@ -21,16 +23,25 @@ var FoldersCollection *mongo.Collection
 var FolderEventsCollection *mongo.Collection
 
 func Init() func() {
-	// Establish mongodb connection
-	var ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	Client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost"))
+
+	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		mongoURI = "mongodb://localhost:27017"
+	}
+
+	Client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURI))
 	if err != nil {
 		logger.StdErr.Panicln(err)
 	}
 
-	// Define mongodb database + collections
-	Db = Client.Database("schej-it")
+	if err := Client.Ping(ctx, nil); err != nil {
+		logger.StdErr.Panicln("Failed to ping MongoDB:", err)
+	}
+
+	Db = Client.Database("salata-wiet")
+
 	EventsCollection = Db.Collection("events")
 	UsersCollection = Db.Collection("users")
 	DailyUserLogCollection = Db.Collection("dailyuserlogs")
@@ -45,11 +56,3 @@ func Init() func() {
 		Client.Disconnect(ctx)
 	}
 }
-
-// MongoDB backup / restore commands
-
-// Backup
-// mongodump --uri="mongodb://localhost:27017" --db=schej-it
-
-// Restore
-// mongorestore --uri="mongodb://localhost:27017" --drop --db=schej-it ./dump

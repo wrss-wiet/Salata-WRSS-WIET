@@ -7,7 +7,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Continue as guest</div>
+        <div>Kontynuuj jako gość</div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -25,7 +25,7 @@
             v-model="name"
             @keyup.enter="submit"
             :rules="nameRules"
-            placeholder="Enter your name..."
+            placeholder="Wprowadź swoją nazwę..."
             autofocus
             hide-details="auto"
             autocomplete="off"
@@ -36,8 +36,8 @@
             v-model="email"
             @keyup.enter="submit"
             :rules="emailRules"
-            placeholder="Enter your email..."
-            hint="The event creator is collecting emails. We will never share your email with anyone or contact you in any way."
+            placeholder="Wprowadź swój adres e-mail..."
+            hint="Twórca wydarzenia zbiera adresy e-mail. Nigdy nie udostępnimy Twojego adresu e-mail nikomu ani nie skontaktujemy się z Tobą w żaden sposób."
             persistent-hint
             solo
           ></v-text-field>
@@ -49,7 +49,7 @@
               :dark="formValid"
               :disabled="!formValid"
             >
-              Continue
+              Kontynuuj
             </v-btn>
           </div>
         </v-form>

@@ -12,11 +12,6 @@
       :no-tabs="newDialogOptions.eventOnly"
       :folder-id="newDialogOptions.folderId"
     />
-    <UpgradeDialog
-      :value="upgradeDialogVisible"
-      @input="handleUpgradeDialogInput"
-    />
-    <UpvoteRedditSnackbar />
     <CookieConsent />
     <div
       v-if="showHeader"
@@ -27,16 +22,10 @@
         class="tw-relative tw-m-auto tw-flex tw-h-full tw-max-w-6xl tw-items-center tw-justify-center tw-px-4"
       >
         <router-link :to="{ name: 'home' }">
-          <Logo type="timeful" />
+          <div class="tw-flex tw-items-center tw-mb-1">
+            <span class="tw-text-2xl tw-font-bold tw-mr-7">Sałata WRSS WIET</span>
+          </div>
         </router-link>
-        <v-expand-x-transition>
-          <span
-            v-if="isPremiumUser"
-            class="tw-ml-2 tw-cursor-default tw-rounded-md tw-bg-[linear-gradient(-25deg,#0a483d,#00994c,#126045,#0a483d)] tw-px-2 tw-py-1 tw-text-sm tw-font-semibold tw-text-white tw-opacity-80"
-          >
-            Premium
-          </span>
-        </v-expand-x-transition>
 
         <v-spacer />
 
@@ -46,25 +35,7 @@
           text
           @click="() => _createNew(true)"
         >
-          Create an event
-        </v-btn>
-        <v-btn
-          v-if="showFeedbackBtn"
-          id="feedback-btn"
-          text
-          href="https://forms.gle/A96i4TTWeKgH3P1W6"
-          target="_blank"
-          @click="trackFeedbackClick"
-        >
-          Give feedback
-        </v-btn>
-        <v-btn
-          v-if="!isPhone"
-          text
-          href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
-          target="_blank"
-        >
-          Donate
+          Stwórz sałatę
         </v-btn>
         <v-btn
           v-if="$route.name === 'home' && !isPhone"
@@ -75,13 +46,13 @@
           }"
           @click="() => _createNew()"
         >
-          + Create new
+          + Stwórz nową sałatę
         </v-btn>
         <div v-if="authUser" class="sm:tw-ml-4">
           <AuthUserMenu />
         </div>
         <v-btn v-else id="top-right-sign-in-btn" text @click="signIn">
-          Sign in
+          Zaloguj się
         </v-btn>
       </div>
     </div>
@@ -149,9 +120,9 @@ html {
 .v-btn.v-btn--is-elevated.primary,
 .v-btn.v-btn--is-elevated.tw-bg-green,
 .v-btn.v-btn--is-elevated.tw-bg-white.tw-text-green {
-  -webkit-box-shadow: 0px 2px 8px 0px #00994c80 !important;
-  -moz-box-shadow: 0px 2px 8px 0px #00994c80 !important;
-  box-shadow: 0px 2px 8px 0px #00994c80 !important;
+  -webkit-box-shadow: 0px 2px 8px 0px #00829980 !important;
+  -moz-box-shadow: 0px 2px 8px 0px #00829980 !important;
+  box-shadow: 0px 2px 8px 0px #00829980 !important;
   border: 1px solid theme("colors.light-green") !important;
 }
 
@@ -241,18 +212,14 @@ import {
   calendarTypes,
   eventTypes,
   numFreeEvents,
-  upgradeDialogTypes,
 } from "@/constants"
 import AutoSnackbar from "@/components/AutoSnackbar"
 import AuthUserMenu from "@/components/AuthUserMenu.vue"
 import SignInNotSupportedDialog from "@/components/SignInNotSupportedDialog.vue"
-import UpvoteRedditSnackbar from "@/components/UpvoteRedditSnackbar.vue"
 import Logo from "@/components/Logo.vue"
 import isWebview from "is-ua-webview"
 import NewDialog from "./components/NewDialog.vue"
-import UpgradeDialog from "@/components/pricing/UpgradeDialog.vue"
 import SignInDialog from "@/components/SignInDialog.vue"
-import DiscordBanner from "@/components/DiscordBanner.vue"
 import CookieConsent from "@/components/CookieConsent.vue"
 
 export default {
@@ -269,11 +236,8 @@ export default {
     AuthUserMenu,
     SignInNotSupportedDialog,
     NewDialog,
-    UpvoteRedditSnackbar,
     Logo,
-    UpgradeDialog,
     SignInDialog,
-    DiscordBanner,
     CookieConsent,
   },
 
@@ -292,7 +256,6 @@ export default {
       "error",
       "info",
       "enablePaywall",
-      "upgradeDialogVisible",
       "newDialogOptions",
     ]),
     isPhone() {
@@ -331,8 +294,6 @@ export default {
     ]),
     ...mapActions([
       "getEvents",
-      "showUpgradeDialog",
-      "hideUpgradeDialog",
       "createNew",
     ]),
     handleScroll(e) {
@@ -401,11 +362,6 @@ export default {
     },
     trackFeedbackClick() {
       this.$posthog.capture("give_feedback_button_clicked")
-    },
-    handleUpgradeDialogInput(value) {
-      if (!value) {
-        this.hideUpgradeDialog()
-      }
     },
   },
 

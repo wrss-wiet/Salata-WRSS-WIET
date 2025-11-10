@@ -20,31 +20,20 @@
             <v-icon class="tw-mr-1" small color="black"
               >mdi-account-plus</v-icon
             >
-            Add team member
-          </v-list-item-title>
-        </v-list-item>
-        <v-list-item
-          v-if="showFeedbackBtn"
-          id="feedback-btn"
-          href="https://forms.gle/A96i4TTWeKgH3P1W6"
-          target="_blank"
-        >
-          <v-list-item-title class="tw-flex tw-items-center tw-gap-1">
-            <v-icon class="tw-mr-1" small color="black">mdi-message</v-icon>
-            Give feedback
+            Dodaj członka zespołu
           </v-list-item-title>
         </v-list-item>
         <v-list-item id="settings-btn" @click="goToSettings">
           <v-list-item-title class="tw-flex tw-items-center tw-gap-1">
             <v-icon class="tw-mr-1" small color="black">mdi-cog</v-icon>
-            Settings
+            Ustawienia
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
         <v-list-item id="sign-out-btn" @click="signOut">
           <v-list-item-title class="red--text tw-flex tw-items-center tw-gap-1">
             <v-icon class="tw-mr-1" small color="red">mdi-logout</v-icon>
-            Sign Out
+            Wyloguj się
           </v-list-item-title>
         </v-list-item>
       </v-list>

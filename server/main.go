@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/fs"
+	// "io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -21,7 +21,7 @@ import (
 	"schej.it/server/db"
 	"schej.it/server/logger"
 	"schej.it/server/routes"
-	"schej.it/server/services/gcloud"
+	// "schej.it/server/services/gcloud"
 	"schej.it/server/slackbot"
 	"schej.it/server/utils"
 
@@ -63,6 +63,10 @@ func main() {
 
 	// Init router
 	router := gin.New()
+
+	// Zaufaj Cloudflare proxy
+	router.SetTrustedProxies([]string{"*"})
+
 	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 		var statusColor, methodColor, resetColor string
 		if param.IsOutputColor() {
@@ -88,7 +92,7 @@ func main() {
 
 	// Cors
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:8080", "https://www.schej.it", "https://schej.it", "https://www.timeful.app", "https://timeful.app"},
+		AllowOrigins:     []string{"http://localhost:8080", "https://salata.wiet.pl"},
 		AllowMethods:     []string{"GET", "POST", "PATCH", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -101,8 +105,8 @@ func main() {
 	defer closeConnection()
 
 	// Init google cloud stuff
-	closeTasks := gcloud.InitTasks()
-	defer closeTasks()
+	// closeTasks := gcloud.InitTasks()
+	// defer closeTasks()
 
 	// Session
 	store := cookie.NewStore([]byte("secret"))
@@ -120,15 +124,21 @@ func main() {
 	slackbot.InitSlackbot(apiRouter)
 
 	err = filepath.WalkDir("../frontend/dist", func(path string, d fs.DirEntry, err error) error {
-		if !d.IsDir() && d.Name() != "index.html" {
-			split := splitPath(path)
-			newPath := filepath.Join(split[3:]...)
-			router.StaticFile(fmt.Sprintf("/%s", newPath), path)
-		}
-		return nil
+			if err != nil {
+					return nil
+			}
+			if d == nil {
+					return nil
+			}
+			if !d.IsDir() && d.Name() != "index.html" {
+					split := splitPath(path)
+					newPath := filepath.Join(split[3:]...)
+					router.StaticFile(fmt.Sprintf("/%s", newPath), path)
+			}
+			return nil
 	})
 	if err != nil {
-		log.Fatalf("failed to walk directories: %s", err)
+			log.Fatalf("failed to walk directories: %s", err)
 	}
 
 	router.LoadHTMLFiles("../frontend/dist/index.html")
@@ -165,7 +175,7 @@ func noRouteHandler() gin.HandlerFunc {
 			event := db.GetEventByEitherId(eventId)
 
 			if event != nil {
-				title := fmt.Sprintf("%s - Timeful (formerly Schej)", event.Name)
+				title := fmt.Sprintf("%s - Sałata WRSS WIET", event.Name)
 				params = gin.H{
 					"title":   title,
 					"ogTitle": title,

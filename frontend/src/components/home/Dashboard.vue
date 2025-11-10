@@ -12,14 +12,8 @@
           class="tw-flex tw-items-baseline tw-gap-2 tw-text-sm tw-font-normal tw-text-very-dark-gray"
         >
           <div>
-            {{ authUser?.numEventsCreated }} / {{ numFreeEvents }} free events
-            created this month
-          </div>
-          <div
-            class="tw-cursor-pointer tw-select-none tw-text-xs tw-font-medium tw-text-green tw-underline"
-            @click="openUpgradeDialog"
-          >
-            Upgrade
+            {{ authUser?.numEventsCreated }} / {{ numFreeEvents }} darmowe sałaty
+            utworzone w tym miesiącu
           </div>
         </div>
       </div>
@@ -29,7 +23,7 @@
         class="tw-text-very-dark-gray"
       >
         <v-icon class="tw-text-lg">mdi-folder-plus</v-icon>
-        <span class="tw-ml-2">New folder</span>
+        <span class="tw-ml-2">Nowy folder</span>
       </v-btn>
     </div>
 
@@ -69,11 +63,11 @@
               </template>
               <v-list dense class="tw-py-1">
                 <v-list-item @click.stop.prevent="openEditFolderDialog(folder)">
-                  <v-list-item-title>Edit</v-list-item-title>
+                  <v-list-item-title>Edytuj</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click.stop.prevent="openDeleteDialog(folder)">
                   <v-list-item-title class="tw-text-red"
-                    >Delete</v-list-item-title
+                    >Usuń</v-list-item-title
                   >
                 </v-list-item>
               </v-list>
@@ -147,21 +141,20 @@
 
       <div v-if="allEvents.length === 0">
         <div class="tw-py-4 tw-text-sm tw-text-very-dark-gray">
-          No events yet! Create one to get started.
+          Brak wydarzeń! Utwórz sałatę, aby rozpocząć.
         </div>
       </div>
     </div>
     <v-dialog v-model="deleteDialog" max-width="400">
       <v-card>
-        <v-card-title>Delete "{{ folderToDelete.name }}"?</v-card-title>
+        <v-card-title>Usunąć "{{ folderToDelete.name }}"?</v-card-title>
         <v-card-text
-          >Are you sure you want to delete this folder? All events you own in
-          this folder will be deleted as well.</v-card-text
+          >Czy na pewno chcesz usunąć ten folder? Wszystkie wydarzenia, których jesteś właścicielem w tym folderze, również zostaną usunięte.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="deleteDialog = false">Cancel</v-btn>
-          <v-btn color="red darken-1" text @click="confirmDelete">Delete</v-btn>
+          <v-btn text @click="deleteDialog = false">Anuluj</v-btn>
+          <v-btn color="red darken-1" text @click="confirmDelete">Usuń</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -196,7 +189,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="closeFolderDialog">Cancel</v-btn>
+          <v-btn text @click="closeFolderDialog">Anuluj</v-btn>
           <v-btn color="primary" text @click="confirmFolderDialog">{{
             folderDialogConfirmText
           }}</v-btn>

@@ -94,7 +94,7 @@
             @click="(e) => $emit('scheduleEvent', e)"
           >
             <v-icon small>mdi-calendar-check</v-icon>
-            <span class="tw-ml-2">Schedule event</span>
+            <span class="tw-ml-2">Umów spotkanie</span>
           </v-btn>
         </template>
         <template v-else>
@@ -103,7 +103,7 @@
             class="tw-mr-1 tw-text-red"
             @click="(e) => $emit('cancelScheduleEvent', e)"
           >
-            Cancel
+            Anuluj
           </v-btn>
           <v-menu offset-y class="tw-z-20">
             <template v-slot:activator="{ on, attrs }">
@@ -113,7 +113,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                Schedule
+                Zaplanuj
               </v-btn>
             </template>
             <v-list dense>
@@ -125,18 +125,7 @@
                   width="20"
                 />
                 <v-list-item-content>
-                  <v-list-item-title>Google Calendar</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item @click="(e) => $emit('confirmScheduleEvent', false)">
-                <v-img
-                  src="@/assets/outlook_logo.svg"
-                  class="tw-mr-2 tw-flex-none"
-                  height="20"
-                  width="20"
-                />
-                <v-list-item-content>
-                  <v-list-item-title>Outlook</v-list-item-title>
+                  <v-list-item-title>Kalendarz Google</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>

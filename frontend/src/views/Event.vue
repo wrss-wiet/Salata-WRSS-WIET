@@ -69,11 +69,11 @@
           <v-card-title>Are you sure?</v-card-title>
           <v-card-text
             ><span class="tw-font-medium"
-              >You're about to add your availability without filling out all
-              pages of this Timeful.</span
+              >Zamierzasz dodać swoją dostępność bez wypełniania wszystkich
+            stron tej sałaty.</span
             >
-            Click the left and right arrows at the top to switch between
-            pages.</v-card-text
+            
+          Kliknij lewą i prawą strzałkę u góry, aby przełączać się między stronami.</v-card-text
           >
           <v-card-actions>
             <v-spacer />
@@ -87,7 +87,7 @@
                   this.pagesNotVisitedDialog = false
                 }
               "
-              >Add anyways</v-btn
+              >Dodaj mimo to</v-btn
             >
           </v-card-actions>
         </v-card>
@@ -107,7 +107,7 @@
                   :href="`https://when2meet.com${event.when2meetHref}`"
                   :small="isPhone"
                   class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
-                  >Imported from when2meet</v-chip
+                  >Zaimportowano z when2meet</v-chip
                 >
                 <template v-if="isGroup">
                   <div class="">
@@ -115,15 +115,15 @@
                       :small="isPhone"
                       class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
                       @click="helpDialog = true"
-                      >Availability group</v-chip
+                      >Dostępność grupy</v-chip
                     >
                   </div>
                   <HelpDialog v-model="helpDialog">
-                    <template v-slot:header>Availability group</template>
+                    <template v-slot:header>Dostępność grupy</template>
                     <div class="mb-4">
-                      Use availability groups to see group members' weekly
-                      calendar availabilities from Google Calendar. Your actual
-                      calendar events are NOT visible to others.
+                      Użyj grup dostępności, aby zobaczyć tygodniowe dostępności
+                      członków grupy z Kalendarza Google. Twoje rzeczywiste
+                      wydarzenia kalendarza nie są widoczne dla innych.
                     </div>
                   </HelpDialog>
                 </template>
@@ -157,7 +157,7 @@
                   @click="resetWeekOffset"
                 >
                   <v-icon class="sm:tw-mr-2">mdi-calendar-today</v-icon>
-                  <span v-if="!isPhone">Today</span>
+                  <span v-if="!isPhone">Dzisiaj</span>
                 </v-btn>
                 <v-btn
                   :icon="isPhone"
@@ -167,7 +167,7 @@
                   :loading="loading"
                 >
                   <v-icon class="tw-mr-1" v-if="!isPhone">mdi-refresh</v-icon>
-                  <span v-if="!isPhone" class="tw-mr-2">Refresh</span>
+                  <span v-if="!isPhone" class="tw-mr-2">Odśwież</span>
                   <v-icon class="tw-text-green" v-else>mdi-refresh</v-icon>
                 </v-btn>
               </div>
@@ -179,7 +179,7 @@
                   @click="copyLink"
                 >
                   <span v-if="!isPhone" class="tw-mr-2 tw-text-green"
-                    >Copy link</span
+                    >Kopiuj link</span
                   >
                   <v-icon class="tw-text-green" v-if="!isPhone"
                     >mdi-content-copy</v-icon
@@ -201,8 +201,8 @@
                   >
                     {{
                       event.blindAvailabilityEnabled
-                        ? "Edit availability"
-                        : `Edit ${selectedGuestRespondent}'s availability`
+                        ? "Edytuj dostępność"
+                        : `Edytuj dostępność ${selectedGuestRespondent}`
                     }}
                   </v-btn>
                   <v-btn
@@ -223,14 +223,14 @@
                     @click="cancelEditing"
                     outlined
                   >
-                    Cancel
+                    Anuluj
                   </v-btn>
                   <v-btn
                     class="tw-w-20 tw-text-white"
                     :class="'tw-bg-green'"
                     @click="() => saveChanges()"
                   >
-                    Save
+                    Zapisz
                   </v-btn></template
                 >
               </div>
@@ -268,52 +268,6 @@
         />
       </div>
 
-      <template v-if="showFeedbackBtn">
-        <div class="tw-w-full tw-border-t tw-border-solid tw-border-gray"></div>
-
-        <div class="tw-flex tw-flex-col tw-items-center" v-if="showFeedbackBtn">
-          <v-btn
-            class="tw-h-16"
-            block
-            id="feedback-btn"
-            text
-            href="https://forms.gle/A96i4TTWeKgH3P1W6"
-            target="_blank"
-          >
-            Give feedback to Timeful team
-          </v-btn>
-          <div
-            class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
-          ></div>
-          <v-btn
-            class="tw-h-16"
-            block
-            text
-            href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
-            target="_blank"
-          >
-            Donate
-          </v-btn>
-          <div
-            class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
-          ></div>
-          <v-btn class="tw-h-16" block text :to="{ name: 'privacy-policy' }">
-            Privacy Policy
-          </v-btn>
-        </div>
-      </template>
-
-      <div
-        class="tw-mb-16 tw-hidden tw-flex-col tw-items-center tw-justify-between sm:tw-flex"
-      >
-        <router-link
-          class="tw-text-xs tw-font-medium tw-text-gray"
-          :to="{ name: 'privacy-policy' }"
-        >
-          Privacy Policy
-        </router-link>
-      </div>
-
       <div class="tw-h-8"></div>
       <!-- Bottom bar for phones -->
       <div
@@ -329,7 +283,7 @@
             text
             class="tw-text-white"
             @click="scheduleEvent"
-            >Schedule</v-btn
+            >Zaplanuj</v-btn
           >
           <v-spacer />
           <v-btn
@@ -352,16 +306,16 @@
         </template>
         <template v-else-if="isEditing">
           <v-btn text class="tw-text-white" @click="cancelEditing">
-            Cancel
+            Anuluj
           </v-btn>
           <v-spacer />
           <v-btn class="tw-bg-white tw-text-green" @click="() => saveChanges()">
-            Save
+            Zapisz
           </v-btn>
         </template>
         <template v-else-if="isScheduling">
           <v-btn text class="tw-text-white" @click="cancelScheduleEvent">
-            Cancel
+            Anuluj
           </v-btn>
           <v-spacer />
           <v-btn
@@ -369,7 +323,7 @@
             class="tw-bg-white tw-text-blue"
             @click="confirmScheduleEvent"
           >
-            Schedule
+            Zaplanuj
           </v-btn>
         </template>
       </div>
@@ -532,18 +486,18 @@ export default {
       return this.scheduleOverlapComponent?.respondents.length
     },
     actionButtonText() {
-      if (this.isSignUp) return "Edit slots"
-      else if (this.userHasResponded || this.isGroup) return "Edit availability"
-      return "Add availability"
+      if (this.isSignUp) return "Edytuj sloty"
+      else if (this.userHasResponded || this.isGroup) return "Edytuj dyspo"
+      return "Dodaj dostępność"
     },
     mobileGuestActionButtonText() {
       return this.event.blindAvailabilityEnabled
-        ? "Edit availability"
-        : `Edit ${this.selectedGuestRespondent}'s availability`
+        ? "Edytuj dyspo"
+        : `Edytuj dostępność ${this.selectedGuestRespondent}`
     },
     mobileActionButtonText() {
-      if (this.isSignUp) return "Edit slots"
-      return this.userHasResponded ? "Edit availability" : "Add availability"
+      if (this.isSignUp) return "Edytuj sloty"
+      return this.userHasResponded ? "Edytuj dyspo" : "Dodaj dostępność"
     },
     isIOS() {
       return isIOS()
@@ -603,7 +557,7 @@ export default {
       navigator.clipboard.writeText(
         `${window.location.origin}/e/${this.event.shortId ?? this.event._id}`
       )
-      this.showInfo("Link copied to clipboard!")
+      this.showInfo("Link skopiowany do schowka!")
     },
     async deleteAvailability() {
       if (!this.scheduleOverlapComponent) return
@@ -619,7 +573,7 @@ export default {
         await this.scheduleOverlapComponent.deleteAvailability()
       }
 
-      this.showInfo(this.isGroup ? "Left group!" : "Availability deleted!")
+      this.showInfo(this.isGroup ? "Opuszczono grupę!" : "Usunięto dostępność!")
       this.scheduleOverlapComponent.stopEditing()
     },
 
@@ -736,7 +690,7 @@ export default {
       }
 
       if (changesPersisted) {
-        this.showInfo("Changes saved!")
+        this.showInfo("Zmiany zapisane!")
         this.scheduleOverlapComponent.stopEditing()
       }
     },
@@ -747,7 +701,7 @@ export default {
       if (payload.name.length > 0) {
         await this.scheduleOverlapComponent.submitAvailability(payload)
 
-        this.showInfo("Changes saved!")
+        this.showInfo("Zmiany zapisane!")
         this.scheduleOverlapComponent.resetCurUserAvailability()
         this.scheduleOverlapComponent.stopEditing()
         this.guestDialog = false
@@ -1056,7 +1010,7 @@ export default {
     } catch (err) {
       switch (err.error) {
         case errors.EventNotFound:
-          this.showError("The specified event does not exist!")
+          this.showError("Określone zdarzenie nie istnieje!")
           this.$router.replace({ name: "home" })
           return
       }
@@ -1091,7 +1045,7 @@ export default {
         this.$nextTick(() => {
           this.scheduleOverlapComponent = this.$refs.scheduleOverlap
         })
-        document.title = `${this.event.name} - Timeful`
+        document.title = `${this.event.name} - Sałata WRSS WIET`
       }
     },
     scheduleOverlapComponent() {

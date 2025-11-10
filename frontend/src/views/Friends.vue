@@ -2,14 +2,14 @@
   <div>
     <v-container class="pa-5">
       <div class="tw-mb-3 tw-flex tw-justify-between">
-        <div class="headline font-weight-bold">My friends</div>
+        <div class="headline font-weight-bold">Moi znajomi</div>
         <div class="headline tw-text-gray">
-          Requests
+          Żądania
           <v-chip color="green" text-color="white">3</v-chip>
         </div>
       </div>
 
-      <v-text-field label="Search" outlined dense></v-text-field>
+      <v-text-field label="Szukaj" outlined dense></v-text-field>
 
       <FriendItem
         class="tw-mb-2"

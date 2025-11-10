@@ -582,10 +582,10 @@
                   {{
                     (userHasResponded && !addingAvailabilityAsGuest) ||
                     curGuestId
-                      ? "Editing"
-                      : "Adding"
+                      ? "Edytowanie"
+                      : "Dodawanie"
                   }}
-                  availability as
+                  dyspo jako
                   <div
                     v-if="curGuestId && canEditGuestName"
                     class="tw-group tw-mt-0.5 tw-flex tw-w-fit tw-cursor-pointer tw-items-center tw-gap-1"
@@ -2070,11 +2070,11 @@ export default {
         case this.states.EDIT_AVAILABILITY:
           const daysOrTimes = this.event.daysOnly ? "days" : "times"
           if (this.availabilityType === availabilityTypes.IF_NEEDED) {
-            return `Click and drag to add your "if needed" ${daysOrTimes} in yellow.`
+            return `Kliknij i przeciągnij, aby dodać "if needed" ${daysOrTimes} w kolorze żółtym.`
           }
-          return `Click and drag to add your "available" ${daysOrTimes} in green.`
+          return `Kliknij i przeciągnij, aby dodać "available" ${daysOrTimes} w kolorze zielonym.`
         case this.states.SCHEDULE_EVENT:
-          return "Click and drag on the calendar to schedule a Google Calendar event during those times."
+          return "Kliknij i przeciągnij na kalendarzu, aby zaplanować wydarzenie Google Calendar w tych godzinach."
         default:
           return ""
       }
@@ -2802,7 +2802,7 @@ export default {
                 this.availabilityAnimEnabled = false
 
                 if (this.showSnackbar) {
-                  this.showInfo("Your availability has been autofilled!")
+                  this.showInfo("Twoja dostępność została uzupełniona automatycznie!")
                 }
                 this.unsavedChanges = false
               }, 500)
@@ -2930,7 +2930,7 @@ export default {
         .catch((err) => {
           console.error(err)
           this.showError(
-            "There was a problem editing this event! Please try again later."
+            "Wystąpił problem z edycją tego wydarzenia! Spróbuj ponownie później."
           )
         })
 

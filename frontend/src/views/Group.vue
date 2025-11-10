@@ -90,7 +90,7 @@ export default {
     } catch (err) {
       switch (err.error) {
         case errors.EventNotFound:
-          this.showError("The specified event does not exist!")
+          this.showError("Określone zdarzenie nie istnieje!")
           this.$router.replace({ name: "home" })
           return
       }

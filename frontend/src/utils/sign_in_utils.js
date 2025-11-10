@@ -9,8 +9,7 @@ export const signInGoogle = ({
   requestContactsPermission = false,
   loginHint = "",
 }) => {
-  const clientId =
-    "523323684219-jfakov2bgsleeb6den4ktpohq4lcnae2.apps.googleusercontent.com"
+  const clientId = process.env.VUE_APP_GOOGLE_CLIENT_ID
   const redirectUri = `${window.location.origin}/auth`
 
   let scope = "openid email profile "

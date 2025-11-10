@@ -6,23 +6,23 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Profile
+          Profil
         </div>
         <div>
-          <div class="tw-mb-1 tw-font-medium">Name</div>
+          <div class="tw-mb-1 tw-font-medium">Imię</div>
           <div class="tw-flex tw-max-w-lg tw-items-center tw-gap-2">
             <v-text-field
               v-model="firstName"
               hide-details
               outlined
-              placeholder="First name"
+              placeholder="Imię"
               :dense="isPhone"
             />
             <v-text-field
               v-model="lastName"
               hide-details
               outlined
-              placeholder="Last name"
+              placeholder="Nazwisko"
               :dense="isPhone"
             />
           </div>
@@ -34,29 +34,12 @@
                   color="primary"
                   outlined
                   class="tw-mr-2"
-                  >Cancel</v-btn
+                  >Anuluj</v-btn
                 >
-                <v-btn @click="saveName" color="primary">Save changes</v-btn>
+                <v-btn @click="saveName" color="primary">Zapisz zmiany</v-btn>
               </div>
             </div>
           </v-expand-transition>
-        </div>
-      </div>
-
-      <!-- Billing Section -->
-      <div
-        v-if="authUser.stripeCustomerId"
-        class="tw-flex tw-flex-col tw-gap-5"
-      >
-        <div
-          class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
-        >
-          Billing
-        </div>
-        <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
-          <div class="tw-text-black">
-            <v-btn @click="openBillingPortal">Manage billing</v-btn>
-          </div>
         </div>
       </div>
 
@@ -64,22 +47,21 @@
       <div class="tw-flex tw-flex-col tw-gap-5">
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
-        >
-          Calendar access
+        >Dostęp do kalendarza
         </div>
         <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
           <div class="tw-text-black">
-            We do not store your calendar data anywhere on our servers, and we
-            only fetch your calendar events for the time frame you specify in
-            order to display your calendar events while you fill out your
-            availability.
+            Nie przechowujemy danych z Twojego kalendarza nigdzie na naszych serwerach i
+            pobieramy tylko wydarzenia z Twojego kalendarza w określonym przez Ciebie przedziale czasowym,
+            aby wyświetlić je podczas wypełniania przez Ciebie formularza
+            dostępności.
           </div>
           <v-btn
             outlined
             class="tw-text-red"
             href="https://myaccount.google.com/connections?filters=3,4&hl=en"
             target="_blank"
-            >Revoke calendar access</v-btn
+            >Cofnij dostęp do kalendarza</v-btn
           >
         </div>
         <CalendarAccounts></CalendarAccounts>
@@ -90,7 +72,7 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Permissions
+          Uprawnienia
         </div>
         <div
           class="tw-flex tw-flex-col tw-rounded-md tw-border-[1px] tw-border-light-gray-stroke"
@@ -128,17 +110,17 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Have a question?
+          Masz pytanie?
         </div>
         <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
           <div class="tw-text-black">
-            Email us at
+            Napisz do nas na adres
             <a
-              href="mailto:contact@timeful.app"
+              href="mailto:dev.wrss.wiet@gmail.com"
               class="tw-text-black tw-underline"
-              >contact@timeful.app</a
+              >dev.wrss.wiet@gmail.com</a
             >
-            with any questions!
+            z wszelkimi pytaniami!
           </div>
         </div>
       </div>
@@ -149,18 +131,18 @@
           <v-dialog v-model="deleteDialog" width="400" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn outlined class="tw-text-red" block v-bind="attrs" v-on="on"
-                >Delete account</v-btn
+                >Usuń konto</v-btn
               >
             </template>
             <v-card>
-              <v-card-title>Are you sure?</v-card-title>
+              <v-card-title>Czy na pewno?</v-card-title>
               <v-card-text class="tw-text-sm tw-text-dark-gray"
-                >Are you sure you want to delete your account? All your account
-                data will be lost.</v-card-text
+                >Czy na pewno chcesz usunąć swoje konto? Wszystkie dane
+                związane z kontem zostaną utracone.</v-card-text
               >
               <div class="tw-mx-6">
                 <div class="tw-text-sm tw-text-dark-gray">
-                  Type your email in the box below to confirm:
+                  Wpisz swój adres e-mail w polu poniżej, aby potwierdzić:
                 </div>
                 <v-text-field
                   v-model="deleteValidateEmail"
@@ -177,7 +159,7 @@
                   color="error"
                   @click="deleteAccount()"
                   :disabled="authUser.email != deleteValidateEmail"
-                  >Delete</v-btn
+                  >Usuń</v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -197,7 +179,7 @@ export default {
   name: "Settings",
 
   metaInfo: {
-    title: "Settings - Timeful",
+    title: "Ustawienia - Sałata WRSS WIET",
   },
 
   components: { CalendarAccounts },
@@ -254,7 +236,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem opening the billing portal! Please try again later."
+            "Wystąpił problem z otwarciem portalu płatności! Proszę spróbować ponownie później."
           )
         })
     },
@@ -265,7 +247,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem deleting your account! Please try again later."
+            "Wystąpił problem z usunięciem konta! Proszę spróbować ponownie później."
           )
         })
     },
@@ -283,7 +265,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem updating your name! Please try again later."
+            "Wystąpił problem z aktualizacją imienia! Proszę spróbować ponownie później."
           )
         })
     },

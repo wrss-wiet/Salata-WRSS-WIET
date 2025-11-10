@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tw-text-md tw-mb-4 tw-font-medium">
-      We need the following permissions to access your Google Calendar events
+      Aby uzyskać dostęp do wydarzeń w Kalendarzu Google, potrzebujemy następujących uprawnień:
     </div>
 
     <div class="tw-mb-8 tw-ml-4 tw-flex tw-flex-col tw-gap-4">
@@ -12,7 +12,7 @@
           height="20"
           width="20"
         />
-        <div>View events on all your calendars.</div>
+        <div>Przeglądaj wydarzenia we wszystkich swoich kalendarzach.</div>
       </div>
       <div class="tw-flex tw-gap-2 tw-text-sm">
         <v-img
@@ -21,18 +21,18 @@
           height="20"
           width="20"
         />
-        <div>See the list of Google calendars you’re subscribed to.</div>
+        <div>Przeglądaj listę kalendarzy Google, do których jesteś subskrybowany.</div>
       </div>
     </div>
 
-    <div class="tw-text-md tw-mb-4 tw-font-medium">These permissions will</div>
+    <div class="tw-text-md tw-mb-4 tw-font-medium">Te uprawnienia będą</div>
     <div
       class="tw-mb-8 tw-flex tw-flex-col tw-gap-4 tw-text-sm tw-text-very-dark-gray"
     >
-      <div>Allow us to display the names/times of your calendar events</div>
+      <div>Zezwól nam na wyświetlanie nazw/czasów wydarzeń w Twoim kalendarzu</div>
       <div>
-        Allow us to display calendar events on all calendars, not just your
-        primary calendar
+        Zezwól nam na wyświetlanie wydarzeń kalendarza we wszystkich kalendarzach, a nie tylko w Twoim
+        kalendarzu głównym
       </div>
     </div>
 

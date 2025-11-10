@@ -7,10 +7,10 @@
         <v-icon>mdi-arrow-up-left</v-icon>
       </div>
       <a
-        href="/blog/schej-is-now-timeful/"
+        href="https://github.com/schej-it/timeful.app"
         class="tw-cursor-pointer tw-select-none tw-text-sm tw-text-dark-gray hover:tw-underline"
       >
-        Formerly known as "Schej"
+        Based on Timeful
       </a>
     </div>
   </div>

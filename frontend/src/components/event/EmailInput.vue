@@ -9,7 +9,7 @@
       item-text="queryString"
       item-value="queryString"
       class="tw-mt-2 tw-text-sm"
-      placeholder="Type an email address and press enter..."
+      placeholder="Wpisz adres e-mail i naciśnij enter..."
       multiple
       append-icon=""
       solo
@@ -46,9 +46,9 @@
       <v-expand-transition>
         <div class="tw-text-xs tw-text-dark-gray" v-if="!hasContactsAccess">
           <a class="tw-underline" @click="requestContactsAccess"
-            >Enable contacts access</a
+            >Włącz dostęp do kontaktów</a
           >
-          for email auto-suggestions.
+          aby uzyskać automatyczne sugestie adresów e-mail.
         </div>
       </v-expand-transition>
     </div>
@@ -107,17 +107,18 @@ export default {
      * Searches contacts based on the query string if the user has access to contacts.
      */
     searchContacts() {
-      if (this.hasContactsAccess) {
-        if (this.timeout) clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          get(`/user/searchContacts?query=${this.query}`).then((results) => {
-            this.searchedContacts = results
-            this.searchedContacts.map((contact) => {
-              contact["queryString"] = this.contactToQueryString(contact)
-            })
-          })
-        }, this.searchDebounceTime)
-      }
+      // if (this.hasContactsAccess) {
+      //   if (this.timeout) clearTimeout(this.timeout)
+      //   this.timeout = setTimeout(() => {
+      //     get(`/user/searchContacts?query=${this.query}`).then((results) => {
+      //       this.searchedContacts = results
+      //       this.searchedContacts.map((contact) => {
+      //         contact["queryString"] = this.contactToQueryString(contact)
+      //       })
+      //     })
+      //   }, this.searchDebounceTime)
+      // }
+      return
     },
     /**
      * Removes the specified email from the remindees list.
@@ -159,7 +160,7 @@ export default {
       for (const email of emails) {
         if (email?.length > 0 && !validateEmail(email)) {
           this.emailsAreValid = false
-          return "Please enter a valid email."
+          return "Proszę podać prawidłowy adres e-mail."
         }
       }
       this.emailsAreValid = true

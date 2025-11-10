@@ -7,13 +7,12 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit group" : "New group" }}
+          {{ edit ? "Edytuj grupę" : "Nowa grupa" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
-        >
-          Ideal for viewing weekly calendar availability
+        >Idealny do przeglądania tygodniowej dostępności kalendarza
         </div>
       </div>
       <v-spacer />
@@ -25,11 +24,11 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Availability groups</template>
+          <template v-slot:header>Grupy dostępności</template>
           <div class="mb-4">
-            Use availability groups to see group members' weekly calendar
-            availabilities from Google Calendar. Your actual calendar events
-            will NOT be visible to others.
+            Użyj dostępności grupy, aby zobaczyć tygodniowe dyspo dodanych członków grupy
+            z ich Kalendarzy Google. Twoje rzeczywiste wydarzenia kalendarza
+            NIE będą widoczne dla innych.
           </div>
         </HelpDialog>
       </template>
@@ -45,7 +44,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your group..."
+          placeholder="Nazwa Twojej grupy..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -54,7 +53,7 @@
         />
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Time range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">Zakres czasowy</div>
           <div class="tw-flex tw-items-baseline tw-justify-center tw-space-x-2">
             <v-select
               v-model="startTime"
@@ -63,7 +62,7 @@
               hide-details
               solo
             ></v-select>
-            <div>to</div>
+            <div>do</div>
             <v-select
               v-model="endTime"
               menu-props="auto"
@@ -75,7 +74,7 @@
         </div>
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Day range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">Zakres dni</div>
           <v-input
             v-model="selectedDaysOfWeek"
             hide-details="auto"
@@ -100,7 +99,7 @@
           <v-checkbox class="tw-mt-2" v-model="startOnMonday" hide-details>
             <template v-slot:label>
               <span class="tw-text-sm tw-text-very-dark-gray">
-                Start on Monday
+                Tydzień od poniedziałku
               </span>
             </template>
           </v-checkbox>
@@ -114,7 +113,7 @@
           @requestContactsAccess="requestContactsAccess"
         >
           <template v-slot:header>
-            <div class="tw-mb-2 tw-text-lg tw-text-black">Members</div>
+            <div class="tw-mb-2 tw-text-lg tw-text-black">Członkowie</div>
           </template>
         </EmailInput>
         <!-- </div> -->
@@ -125,7 +124,7 @@
             block
             text
             @click="showAdvancedOptions = !showAdvancedOptions"
-            ><span class="tw-mr-1">Advanced options</span>
+            ><span class="tw-mr-1">Opcje zaawansowane</span>
             <v-icon :class="`tw-rotate-${showAdvancedOptions ? '180' : '0'}`"
               >mdi-chevron-down</v-icon
             ></v-btn
@@ -150,13 +149,13 @@
           class="tw-mt-4 tw-bg-green"
           @click="submit"
         >
-          {{ edit ? "Save edits" : "Create group" }}
+          {{ edit ? "Zapisz zmiany" : "Utwórz grupę" }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          Przed kontynuowaniem popraw błędy w formularzu
         </div>
       </div>
     </v-card-actions>
@@ -395,7 +394,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem editing this group! Please try again later."
+              "Wystąpił problem podczas edycji tej grupy! Spróbuj ponownie później."
             )
           })
           .finally(() => {

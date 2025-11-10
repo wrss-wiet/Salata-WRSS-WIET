@@ -5,7 +5,7 @@ export default {
   install(Vue, options) {
     // Initialize PostHog with capturing disabled by default
     Vue.prototype.$posthog = posthog.init(process.env.VUE_APP_POSTHOG_API_KEY, {
-      api_host: "https://e.timeful.app",
+      api_host: "",
       capture_pageview: false,
       autocapture: false,
       opt_out_capturing_by_default: true,
