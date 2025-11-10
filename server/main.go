@@ -123,26 +123,32 @@ func main() {
 	routes.InitFolders(apiRouter)
 	slackbot.InitSlackbot(apiRouter)
 
-	err = filepath.WalkDir("../frontend/dist", func(path string, d fs.DirEntry, err error) error {
+	isLocalFrontend := os.Getenv("LOCAL_FRONTEND_ON_BACKEND") == "true"
+
+	if isLocalFrontend {
+		err = filepath.WalkDir("../frontend/dist", func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
-					return nil
+				return nil
 			}
 			if d == nil {
-					return nil
+				return nil
 			}
 			if !d.IsDir() && d.Name() != "index.html" {
-					split := splitPath(path)
-					newPath := filepath.Join(split[3:]...)
-					router.StaticFile(fmt.Sprintf("/%s", newPath), path)
+				split := splitPath(path)
+				newPath := filepath.Join(split[3:]...)
+				router.StaticFile(fmt.Sprintf("/%s", newPath), path)
 			}
 			return nil
-	})
-	if err != nil {
+		})
+		if err != nil {
 			log.Fatalf("failed to walk directories: %s", err)
-	}
+		}
 
-	router.LoadHTMLFiles("../frontend/dist/index.html")
-	router.NoRoute(noRouteHandler())
+		router.LoadHTMLFiles("../frontend/dist/index.html")
+		router.NoRoute(noRouteHandler())
+	} else {
+		// Production frontend serving with nginx, here do nothing
+	}
 
 	// Init swagger documentation
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
